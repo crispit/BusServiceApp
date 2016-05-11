@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/list_bg" >
+
+    <TextView
+        android:id="@+id/errorsymptom"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dip"
+        android:layout_toLeftOf="@+id/errordate"
+        android:maxLines="1"
+        android:text="symptom"
+        android:textColor="@android:color/black"
+        android:textSize="18dip"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/errorgrade"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dip"
+        android:layout_below="@+id/errorsymptom"
+        android:maxLines="1"
+        android:text="grade"
+        android:textColor="@android:color/black"
+        android:textSize="15dip"
+        android:textStyle="bold"/>
+
+    <TextView
+        android:id="@+id/errorcomment"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/errorgrade"
+        android:ellipsize="end"
+        android:maxLines="3"
+        android:text="comment"
+        android:textColor="@android:color/black"
+        android:textSize="13dip" />
+
+    <TextView
+        android:id="@+id/errordate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="5dp"
+        android:layout_marginTop="5dip"
+        android:text="date"
+        android:textColor="@android:color/black"
+        android:textSize="12dip" />
+
+</RelativeLayout>
