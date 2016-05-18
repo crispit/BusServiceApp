@@ -1,0 +1,7 @@
+<searchable xmlns:android="http://schemas.android.com/apk/res/android"
+    android:hint="search bus"
+    android:label="@string/app_name"
+    android:searchSuggestAuthority="busList"
+    android:searchSuggestIntentAction=""
+    android:searchSuggestIntentData=""
+    android:searchButtonText="Sök buss" />
