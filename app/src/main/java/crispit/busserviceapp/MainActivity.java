@@ -7,15 +7,25 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.view.MenuInflater;
+import android.app.SearchManager;
+import android.support.v7.widget.SearchView;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.support.v4.view.MenuItemCompat;
+import android.content.ComponentName;
+
 
 import java.util.ArrayList;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity
+        implements SearchView.OnQueryTextListener {
 
     ListView listView ;
     DBHelper mydb;
     private ArrayList<String> list;
     String busId;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,6 +66,8 @@ public class MainActivity extends AppCompatActivity {
             }
 
         });
+
+
     }
 
     public void setAdapterToListview() {
@@ -64,4 +76,46 @@ public class MainActivity extends AppCompatActivity {
         listView.setAdapter(objAdapter);
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.search_menu, menu);
+
+        MenuItem searchItem = menu.findItem(R.id.search);
+        SearchView searchView = (SearchView) MenuItemCompat.getActionView(searchItem);
+        searchView.setQueryHint("Sök buss");
+        searchView.setOnQueryTextListener(this);
+
+
+        return true;
+    }
+
+    @Override
+    public boolean onQueryTextSubmit(String query) {
+
+        if(query==null){
+            setAdapterToListview();
+            return false;
+        }
+
+        // User pressed the search button
+        ArrayList<String> temp = new ArrayList<>();
+        for (String s : list) {
+            if (s.contains(query)) {
+                temp.add(s);
+            }
+        }
+        CustomListAdapter objAdapter = new CustomListAdapter(MainActivity.this,
+                R.layout.custom_list, temp);
+        listView.setAdapter(objAdapter);
+        return false;
+    }
+
+
+    @Override
+    public boolean onQueryTextChange(String newText) {
+        // User changed the text
+        if(newText.equals(""))
+            setAdapterToListview();
+        return false;
+    }
 }

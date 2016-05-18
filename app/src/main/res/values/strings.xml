@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Bus Service App</string>
-    <string name="busInfo">Bus Info</string>
-    <string name="detailedErrorReport">Detailed Error Report</string>
+    <string name="app_name">Serviceappen</string>
+    <string name="busInfo">Bussinformation</string>
+    <string name="detailedErrorReport">Detaljerad Felrapport</string>
 </resources>
