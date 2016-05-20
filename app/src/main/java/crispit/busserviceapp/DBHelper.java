@@ -226,7 +226,8 @@ public class DBHelper extends SQLiteOpenHelper{
                     res.getString(res.getColumnIndex(COLUMN_NAME_COMMENT)),
                     res.getString(res.getColumnIndex(COLUMN_NAME_BUSID)),
                     res.getString(res.getColumnIndex(COLUMN_NAME_DATE)),
-                    res.getInt(res.getColumnIndex(COLUMN_NAME_GRADE)));
+                    res.getInt(res.getColumnIndex(COLUMN_NAME_GRADE)),
+                    res.getString(res.getColumnIndex(COLUMN_NAME_STATUS)));
             array_list.add(er);
             res.moveToNext();
         }
@@ -303,6 +304,29 @@ public class DBHelper extends SQLiteOpenHelper{
         }
 
         return Integer.toString(nextId+1);
+    }
+
+    public ArrayList<ErrorReport> getAllReportsDetailed() {
+        ArrayList<ErrorReport> array_list = new ArrayList<>();
+
+        //hp = new HashMap();
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor res = db.rawQuery("select * from ErrorReport"/* where NOT Status = 'fixed'"*/, null);
+        res.moveToFirst();
+
+        while (res.isAfterLast() == false) {
+
+            ErrorReport er = new ErrorReport(res.getString(res.getColumnIndex(COLUMN_NAME_ENTRYID)),
+                    res.getString(res.getColumnIndex(COLUMN_NAME_SYMPTOM)),
+                    res.getString(res.getColumnIndex(COLUMN_NAME_COMMENT)),
+                    res.getString(res.getColumnIndex(COLUMN_NAME_BUSID)),
+                    res.getString(res.getColumnIndex(COLUMN_NAME_DATE)),
+                    res.getInt(res.getColumnIndex(COLUMN_NAME_GRADE)),
+                    res.getString(res.getColumnIndex(COLUMN_NAME_STATUS)));
+            array_list.add(er);
+            res.moveToNext();
+        }
+        return array_list;
     }
 
 }

@@ -10,16 +10,16 @@ public class ErrorReport {
     private String pubdate;
     private int grade;
     private String busid;
+    private String status;
 
-    public ErrorReport(String id, String symptom, String comment, String busid, String pubdate, int grade){
-
+    public ErrorReport(String id, String symptom, String comment, String busid, String pubdate, int grade, String status){
         this.id = id;
         this.symptom = symptom;
         this.comment = comment;
         this.busid = busid;
         this.pubdate = pubdate;
         this.grade = grade;
-
+        this.status = status;
     }
 
     public String getId() {
@@ -66,6 +66,13 @@ public class ErrorReport {
     }
     public String getBusid(){
         return busid;
+    }
+
+    public void setStatus(String status){
+        this.status = status;
+    }
+    public String getStatus(){
+        return status;
     }
 
 }
