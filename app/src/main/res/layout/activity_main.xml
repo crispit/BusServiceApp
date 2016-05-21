@@ -25,7 +25,8 @@
         android:layout_height="wrap_content"
         android:text="Historik"
         android:id="@+id/button3"
-        android:layout_gravity="center_horizontal" />
+        android:layout_gravity="center_horizontal"
+        android:onClick="openHistory"/>/>
 
 
 </LinearLayout>

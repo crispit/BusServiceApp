@@ -212,7 +212,7 @@ public class DBHelper extends SQLiteOpenHelper{
     }
 
     //Metod för att visa lista med felrapporter
-    public ArrayList<ErrorReport> getAllReportsDetailed() {
+    public ArrayList<ErrorReport> getAllNonFixedReportsDetailed() {
         ArrayList<ErrorReport> array_list = new ArrayList<>();
 
         SQLiteDatabase db = this.getReadableDatabase();
@@ -233,6 +233,26 @@ public class DBHelper extends SQLiteOpenHelper{
         }
         return array_list;
     }
+    public ArrayList<ErrorReport> getAllFixedReportsDetailed() {
+        ArrayList<ErrorReport> array_list = new ArrayList<>();
 
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor res = db.rawQuery("select * from "+TABLE_NAME+" where "+COLUMN_NAME_STATUS+" = 'Löst'", null);
+        res.moveToFirst();
+
+        while (res.isAfterLast() == false) {
+
+            ErrorReport er = new ErrorReport(res.getString(res.getColumnIndex(COLUMN_NAME_ENTRYID)),
+                    res.getString(res.getColumnIndex(COLUMN_NAME_SYMPTOM)),
+                    res.getString(res.getColumnIndex(COLUMN_NAME_COMMENT)),
+                    res.getString(res.getColumnIndex(COLUMN_NAME_BUSID)),
+                    res.getString(res.getColumnIndex(COLUMN_NAME_DATE)),
+                    res.getInt(res.getColumnIndex(COLUMN_NAME_GRADE)),
+                    res.getString(res.getColumnIndex(COLUMN_NAME_STATUS)));
+            array_list.add(er);
+            res.moveToNext();
+        }
+        return array_list;
+    }
 
 }

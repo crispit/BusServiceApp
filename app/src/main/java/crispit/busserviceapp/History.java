@@ -22,7 +22,7 @@ import java.util.Locale;
 /**
  * Created by Andreas on 2016-05-20.
  */
-public class Livefeed extends AppCompatActivity {
+public class History extends AppCompatActivity {
 
     ListView listView ;
     private Button sortButton;
@@ -90,7 +90,7 @@ public class Livefeed extends AppCompatActivity {
 
     public void updateList(View view){
 
-        errorList = mydb.getAllNonFixedReportsDetailed();
+        errorList = mydb.getAllFixedReportsDetailed();
         setAdapterToListview();
         sortState = sortState%2 +1;
         sort(view);
@@ -99,7 +99,7 @@ public class Livefeed extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_livefeed);
+        setContentView(R.layout.activity_history);
         //ListView busList = new ListView(this.getBaseContext());
         sortButton = (Button) findViewById(R.id.sortButton);
         updateButton = (Button) findViewById(R.id.updateButton);
@@ -119,7 +119,7 @@ public class Livefeed extends AppCompatActivity {
         mydb = new DBHelper(sharedContext);
         listView = (ListView) findViewById(R.id.busList);
 
-        errorList = mydb.getAllNonFixedReportsDetailed();
+        errorList = mydb.getAllFixedReportsDetailed();
         //errorList.add(new ErrorReport("994","kf","jk","jga","1234-12-12,12:22:22",3, "Status"));
 
         setAdapterToListview();
@@ -144,7 +144,7 @@ public class Livefeed extends AppCompatActivity {
 
 
     public void setAdapterToListview() {
-        objAdapter = new ListRowAdapter(Livefeed.this,
+        objAdapter = new ListRowAdapter(History.this,
                 R.layout.row, errorList);
         listView.setAdapter(objAdapter);
 
