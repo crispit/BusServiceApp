@@ -28,6 +28,14 @@
             android:name=".BusInfo"
             android:label="@string/busInfo">
         </activity>
+        <activity
+            android:name=".BusSelector"
+            android:label="BusSelector">
+        </activity>
+        <activity
+            android:name=".Livefeed"
+            android:label="Livefeed">
+        </activity>
 
         //searchableActivity
         <activity android:name=".SearchableActivity">

@@ -12,7 +12,7 @@ public class ErrorReport {
     private String busid;
     private String status;
 
-    public ErrorReport(String id, String symptom, String comment, String busid, String pubdate, int grade, String status){
+    public ErrorReport(String id, String symptom, String comment, String busid, String pubdate, int grade, String status) {
 
         this.id = id;
         this.symptom = symptom;
@@ -63,17 +63,20 @@ public class ErrorReport {
     public void setGrade(int grade) {
         this.grade = grade;
     }
-    public void setBusid(String id){
+
+    public void setBusid(String id) {
         this.busid = id;
     }
-    public String getBusid(){
+
+    public String getBusid() {
         return busid;
     }
 
-    public void setStatus(String status){
+    public void setStatus(String status) {
         this.status = status;
     }
-    public String getStatus(){
+
+    public String getStatus() {
         return status;
     }
 
