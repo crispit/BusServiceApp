@@ -28,14 +28,15 @@ public class DetailedErrorReport extends AppCompatActivity {
         errorId = getIntent().getStringExtra("errorId");
 
         //Setting the context for the database to the shared database
-        Context sharedContext = null;
+        Context sharedContext;
         try {
-            sharedContext = this.createPackageContext("crispit.errorextractor", Context.CONTEXT_INCLUDE_CODE);
+            sharedContext = this.createPackageContext("com.example.fredrikhansson.komigennuraa", Context.CONTEXT_INCLUDE_CODE);
             if (sharedContext == null) {
                 return;
             }
         } catch (Exception e) {
             String error = e.getMessage();
+            System.out.print(error);
             return;
         }
 
@@ -60,14 +61,14 @@ public class DetailedErrorReport extends AppCompatActivity {
     }
 
     public void fix(View view){
-        mydb.updateStatus(errorId, "fixed");
-        detailedList.set(6, "Status: fixed");
+        mydb.updateStatus(errorId, "Löst");
+        detailedList.set(6, "Status: Löst");
         objAdapter.notifyDataSetChanged();
     }
 
     public void unfix(View view){
-        mydb.updateStatus(errorId,"completed");
-        detailedList.set(6, "Status: completed");
+        mydb.updateStatus(errorId,"Kommenterad");
+        detailedList.set(6, "Status: Kommenterad");
         objAdapter.notifyDataSetChanged();
     }
 

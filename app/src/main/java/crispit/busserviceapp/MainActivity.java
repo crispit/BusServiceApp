@@ -36,7 +36,7 @@ public class MainActivity extends AppCompatActivity
         //Setting the context for the database to the shared database
         Context sharedContext = null;
         try {
-            sharedContext = this.createPackageContext("crispit.errorextractor", Context.CONTEXT_INCLUDE_CODE);
+            sharedContext = this.createPackageContext("com.example.fredrikhansson.komigennuraa", Context.CONTEXT_INCLUDE_CODE);
             if (sharedContext == null) {
                 return;
             }
