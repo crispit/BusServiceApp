@@ -8,6 +8,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import java.text.DateFormat;
 import java.text.ParseException;
@@ -70,29 +71,12 @@ public class BusInfo extends AppCompatActivity {
     }
 
     public void sort(View view) {
+
         if(sortState == 2) {
-            Collections.sort(errorList, new Comparator<ErrorReport>() {
-                @Override
-                public int compare(ErrorReport report1, ErrorReport report2) {
+            sortByDate();
 
-                    DateFormat format = new SimpleDateFormat("yyyy-MM-dd,hh:mm:ss", Locale.ENGLISH);
-                    Date date1=null;
-                    Date date2=null;
-                    try {
-                        date1 = format.parse(report1.getPubdate());
-                        date2 = format.parse(report2.getPubdate());
-                    }
-                    catch(ParseException e){
-
-                    }
-
-                    return (date1.compareTo(date2)) * (-1);
-
-                }
-            });
-            objAdapter.notifyDataSetChanged();
-            sortState=1;
         }
+
         else if(sortState == 1){
             Collections.sort(errorList, new Comparator<ErrorReport>() {
                 @Override
@@ -109,8 +93,36 @@ public class BusInfo extends AppCompatActivity {
             });
             objAdapter.notifyDataSetChanged();
             sortState=2;
+            TextView sortText = (TextView)findViewById(R.id.sortText);
+            sortText.setText("Grad ▲");
         }
 
+    }
+
+    public void sortByDate (){
+
+        Collections.sort(errorList, new Comparator<ErrorReport>() {
+            @Override
+            public int compare(ErrorReport report1, ErrorReport report2) {
+                DateFormat format = new SimpleDateFormat("yyyy-MM-dd,hh:mm:ss", Locale.ENGLISH);
+                Date date1=null;
+                Date date2=null;
+                try {
+                    date1 = format.parse(report1.getPubdate());
+                    date2 = format.parse(report2.getPubdate());
+                }
+                catch(ParseException e){
+
+                }
+
+                return (date1.compareTo(date2)) * (-1);
+
+            }
+        });
+        objAdapter.notifyDataSetChanged();
+        sortState=1;
+        TextView sortText = (TextView)findViewById(R.id.sortText);
+        sortText.setText("Rapportdatum ▲");
     }
 
     public void setAdapterToListview() {

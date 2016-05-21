@@ -41,6 +41,7 @@ public class BusSelector extends AppCompatActivity
             }
         } catch (Exception e) {
             String error = e.getMessage();
+            System.out.print(error);
             return;
         }
 
