@@ -50,7 +50,9 @@ public class DetailedErrorReport extends AppCompatActivity {
             if (res.getColumnName(i).equals("Status") && !res.getString(i).equals("Löst")){
                 detailedList.add(res.getColumnName(i)+ ": " + "Icke löst");
             }
-            detailedList.add(res.getColumnName(i)+ ": " + res.getString(i));
+            else {
+                detailedList.add(res.getColumnName(i) + ": " + res.getString(i));
+            }
         }
 
         listView = (ListView) findViewById(R.id.detailedErrorReportView);
@@ -70,7 +72,17 @@ public class DetailedErrorReport extends AppCompatActivity {
     }
 
     public void unfix(View view){
-        mydb.updateStatus(errorId,"Kommenterad");
+        Cursor cur = mydb.getData(errorId);
+        cur.moveToFirst();
+
+        if (cur.getString(cur.getColumnIndex(mydb.COLUMN_NAME_COMMENT)).equals("Kommentar saknas...")){
+            mydb.updateStatus(errorId,"Okommenterad");
+
+        }
+        else {
+            mydb.updateStatus(errorId,"Kommenterad");
+        }
+
         detailedList.set(6, "Status: Icke löst");
         objAdapter.notifyDataSetChanged();
     }
