@@ -1,5 +1,6 @@
 package crispit.busserviceapp;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -103,12 +104,23 @@ public class Livefeed extends AppCompatActivity {
         sortButton = (Button) findViewById(R.id.sortButton);
         updateButton = (Button) findViewById(R.id.updateButton);
         //busId = "Vin_Num_001";
-        mydb = new DBHelper(this);
+        //Setting the context for the database to the shared database
+        Context sharedContext = null;
+        try {
+            sharedContext = this.createPackageContext("com.example.fredrikhansson.komigennuraa", Context.CONTEXT_INCLUDE_CODE);
+            if (sharedContext == null) {
+                return;
+            }
+        } catch (Exception e) {
+            String error = e.getMessage();
+            return;
+        }
 
+        mydb = new DBHelper(sharedContext);
         listView = (ListView) findViewById(R.id.busList);
 
         errorList = mydb.getAllReportsDetailed();
-       // errorList.add(new ErrorReport("994","kf","jk","jga","1234-12-12,12:22:22",3));
+        //errorList.add(new ErrorReport("994","kf","jk","jga","1234-12-12,12:22:22",3, "Status"));
 
         setAdapterToListview();
 
