@@ -6,6 +6,7 @@ package crispit.busserviceapp;
 
 import android.app.Activity;
 import android.content.Context;
+import android.support.v4.content.ContextCompat;
 import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -62,7 +63,7 @@ public class ListRowAdapter extends ArrayAdapter<ErrorReport> {
         if (holder.errorGrade != null //&& null != er.getGrade()
             //&& er.getGrade().trim().length() > 0
                 ) {
-            holder.errorGrade.setText("Grade:" + Html.fromHtml(Integer.toString(er.getGrade())));
+            holder.errorGrade.setText("Gradering:" + Html.fromHtml(Integer.toString(er.getGrade())));
         }
         if (holder.errorComment != null && null != er.getComment()
                 && er.getComment().trim().length() > 0) {
@@ -70,15 +71,21 @@ public class ListRowAdapter extends ArrayAdapter<ErrorReport> {
         }
         if (holder.errorDate != null && null != er.getPubdate()
                 && er.getPubdate().trim().length() > 0) {
-            holder.errorDate.setText(Html.fromHtml(er.getPubdate()));
+            holder.errorDate.setText("Tidpunkt: \n" +Html.fromHtml(er.getPubdate()));
         }
+
+        view.setBackgroundResource(R.drawable.list_bg);
 
         //here set your color as per position
 
-        if (position%2 == 0) {
-            view.setBackgroundResource(R.drawable.list_bg_even);
-        } else if (position%2 == 1) {
-            view.setBackgroundResource(R.drawable.list_bg_odd);
+        if (er.getGrade()==1) {
+            view.setBackgroundColor(ContextCompat.getColor(this.getContext(),R.color.yellow));
+        } else if (er.getGrade()==2) {
+            view.setBackgroundColor(ContextCompat.getColor(this.getContext(), R.color.orangeb1));
+        } else if (er.getGrade()==3) {
+            view.setBackgroundColor(ContextCompat.getColor(this.getContext(), R.color.orangeb2));
+        } else if (er.getGrade()==4) {
+            view.setBackgroundColor(ContextCompat.getColor(this.getContext(), R.color.red));
         }
 
         return view;

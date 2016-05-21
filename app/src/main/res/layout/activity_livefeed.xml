@@ -8,7 +8,7 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="crispit.busserviceapp.Livefeed"
-    android:background="#bdd895">
+    android:background="@color/colorBackground">
 
     <ListView
         android:layout_width="wrap_content"
