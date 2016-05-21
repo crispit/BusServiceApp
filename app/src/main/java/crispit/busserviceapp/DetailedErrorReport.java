@@ -47,6 +47,9 @@ public class DetailedErrorReport extends AppCompatActivity {
         res.moveToFirst();
 
         for(int i=0;i<res.getColumnCount();i++){
+            if (res.getColumnName(i).equals("Status") && !res.getString(i).equals("Löst")){
+                detailedList.add(res.getColumnName(i)+ ": " + "Icke löst");
+            }
             detailedList.add(res.getColumnName(i)+ ": " + res.getString(i));
         }
 
@@ -68,7 +71,7 @@ public class DetailedErrorReport extends AppCompatActivity {
 
     public void unfix(View view){
         mydb.updateStatus(errorId,"Kommenterad");
-        detailedList.set(6, "Status: Kommenterad");
+        detailedList.set(6, "Status: Icke löst");
         objAdapter.notifyDataSetChanged();
     }
 
