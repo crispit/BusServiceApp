@@ -36,30 +36,36 @@ public class Livefeed extends AppCompatActivity {
     public void sort(View view) {
 
         if(sortState == 2) {
+            sortByGrade();
             sortByDate();
 
         }
 
         else if(sortState == 1){
-            Collections.sort(errorList, new Comparator<ErrorReport>() {
-                @Override
-                public int compare(ErrorReport report1, ErrorReport report2) {
-                    int a = report1.getGrade();
-                    int b = report2.getGrade();
-                    if(a>b)
-                        return -1;
-                    else if (a<b)
-                        return 1;
-                    else
-                        return 0;
-                }
-            });
-            objAdapter.notifyDataSetChanged();
-            sortState=2;
-            TextView sortText = (TextView)findViewById(R.id.sortText);
-            sortText.setText("Grad ▲");
+            sortByDate();
+            sortByGrade();
         }
 
+    }
+
+    public void sortByGrade(){
+        Collections.sort(errorList, new Comparator<ErrorReport>() {
+            @Override
+            public int compare(ErrorReport report1, ErrorReport report2) {
+                int a = report1.getGrade();
+                int b = report2.getGrade();
+                if(a>b)
+                    return -1;
+                else if (a<b)
+                    return 1;
+                else
+                    return 0;
+            }
+        });
+        objAdapter.notifyDataSetChanged();
+        sortState=2;
+        TextView sortText = (TextView)findViewById(R.id.sortText);
+        sortText.setText("Grad ▲");
     }
 
     public void sortByDate (){
