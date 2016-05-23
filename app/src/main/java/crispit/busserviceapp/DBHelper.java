@@ -191,6 +191,20 @@ public class DBHelper extends SQLiteOpenHelper{
 
     }
 
+    /**
+     * Method for udpating the status in an error report with a specific error id
+     * @param errorId unique ID for the error report which to update
+     */
+    public void updateGrade(String errorId, String grade){
+
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues contentValues = new ContentValues();
+        contentValues.put(COLUMN_NAME_GRADE, grade);
+
+        db.update(TABLE_NAME, contentValues, COLUMN_NAME_ENTRYID+" = ? ", new String[]{errorId});
+
+    }
+
 
     /**
      * Method for getting all the unique bus id's (that has had an error)

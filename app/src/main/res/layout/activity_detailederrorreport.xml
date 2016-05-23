@@ -17,10 +17,20 @@
         style="?android:attr/buttonStyleSmall"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:text="Ändra gradering"
+        android:onClick="changeGrade"
+        android:id="@+id/changeGradeButton"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true" />
+
+    <Button
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:text="Markera som löst"
         android:onClick="fix"
         android:id="@+id/fixButton"
-        android:layout_alignParentTop="true"
+        android:layout_below="@+id/changeGradeButton"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
 
@@ -31,7 +41,7 @@
         android:text="Markera som icke löst"
         android:onClick="unfix"
         android:id="@+id/unfixButton"
-        android:layout_alignParentTop="true"
+        android:layout_alignTop="@+id/fixButton"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true" />
 

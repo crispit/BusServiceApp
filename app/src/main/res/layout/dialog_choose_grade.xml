@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/gradeLayout"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    style="?android:attr/buttonBarStyle"
+    android:orientation="horizontal"
+    android:weightSum="100"
+    android:layout_above="@+id/button2"
+    android:layout_alignParentLeft="true"
+    android:layout_alignParentStart="true"
+    android:layout_marginBottom="44dp">
+
+        <Button
+            style="?android:attr/buttonBarButtonStyle"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/cButton1"
+            android:adjustViewBounds="true"
+            android:scaleType="centerCrop"
+            android:layout_weight="25"
+            android:background="@drawable/custom_button1"
+            android:onClick="gradeSelected" />
+
+        <Button
+            style="?android:attr/buttonBarButtonStyle"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/cButton2"
+            android:adjustViewBounds="true"
+            android:scaleType="centerCrop"
+            android:layout_weight="25"
+            android:background="@drawable/custom_button2"
+            android:onClick="gradeSelected" />
+
+        <Button
+            style="?android:attr/buttonBarButtonStyle"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/cButton3"
+            android:adjustViewBounds="true"
+            android:scaleType="centerCrop"
+            android:layout_weight="25"
+            android:background="@drawable/custom_button3"
+            android:onClick="gradeSelected" />
+
+        <Button
+            style="?android:attr/buttonBarButtonStyle"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/cButton4"
+            android:adjustViewBounds="true"
+            android:scaleType="centerCrop"
+            android:layout_weight="25"
+            android:background="@drawable/custom_button4"
+            android:onClick="gradeSelected" />
+</LinearLayout>

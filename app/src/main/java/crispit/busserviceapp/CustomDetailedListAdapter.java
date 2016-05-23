@@ -11,6 +11,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.TextView;
 
 import java.util.HashMap;
@@ -55,6 +56,8 @@ public class CustomDetailedListAdapter extends ArrayAdapter<HashMap<String,Strin
 
         holder.description = (TextView) view.findViewById(R.id.custom_list_description);
         holder.data = (TextView) view.findViewById(R.id.custom_list_data);
+        //holder.gradeButton = (Button)view.findViewById(R.id.changeGradeButton);
+
 
         if (holder.description != null && null != errorDescription
                 && errorDescription.trim().length() > 0) {
@@ -65,6 +68,17 @@ public class CustomDetailedListAdapter extends ArrayAdapter<HashMap<String,Strin
             holder.data.setText(Html.fromHtml(errorData));
         }
         //here set your color as per position
+
+        //holder.gradeButton = new Button(this.getContext());
+
+        /*if(!holder.description.getText().equals("Gradering:")){
+
+            holder.gradeButton = (Button)view.findViewById(R.id.changeGradeButton);
+            //holder.gradeButton.setText("Ändra!");
+            //holder.gradeButton.setBackgroundColor(android.R.color.black);
+
+        }*/
+
 
         if (position%2 == 0) {
             view.setBackgroundResource(R.drawable.list_bg_even);
@@ -79,6 +93,7 @@ public class CustomDetailedListAdapter extends ArrayAdapter<HashMap<String,Strin
 
         public TextView data;
         public TextView description;
+        public Button gradeButton;
 
     }
 
