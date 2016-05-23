@@ -52,7 +52,7 @@ public class BusInfo extends AppCompatActivity {
         }
 
         mydb = new DBHelper(sharedContext);
-        errorList = mydb.getBusReports(busId);
+        errorList = mydb.getUnsolvedBusReports(busId);
 
         listView = (ListView) findViewById(R.id.businfoview);
         setAdapterToListview();

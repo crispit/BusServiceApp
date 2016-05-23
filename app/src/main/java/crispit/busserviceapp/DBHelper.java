@@ -255,4 +255,32 @@ public class DBHelper extends SQLiteOpenHelper{
         return array_list;
     }
 
+    /**
+     * Method for finding all Unsolved error reports for a specific bus
+     * @param busID id to identify a specific bus
+     * @return an arraylist with all the reports for the specific bus
+     */
+    public ArrayList<ErrorReport> getUnsolvedBusReports(String busID) {
+        ArrayList<ErrorReport> array_list = new ArrayList<>();
+
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor res = db.rawQuery("select * from "+TABLE_NAME+" where "+COLUMN_NAME_BUSID+" = ?" + " AND NOT "
+                + COLUMN_NAME_STATUS + " = 'Löst' ", new String[]{busID});
+        res.moveToFirst();
+
+        while (res.isAfterLast() == false) {
+
+            ErrorReport er = new ErrorReport(res.getString(res.getColumnIndex(COLUMN_NAME_ENTRYID)),
+                    res.getString(res.getColumnIndex(COLUMN_NAME_SYMPTOM)),
+                    res.getString(res.getColumnIndex(COLUMN_NAME_COMMENT)),
+                    res.getString(res.getColumnIndex(COLUMN_NAME_BUSID)),
+                    res.getString(res.getColumnIndex(COLUMN_NAME_DATE)),
+                    res.getInt(res.getColumnIndex(COLUMN_NAME_GRADE)),
+                    res.getString(res.getColumnIndex(COLUMN_NAME_STATUS)));
+            array_list.add(er);
+            res.moveToNext();
+        }
+        return array_list;
+    }
+
 }
