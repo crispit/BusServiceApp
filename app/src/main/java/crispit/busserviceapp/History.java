@@ -65,7 +65,7 @@ public class History extends AppCompatActivity {
         objAdapter.notifyDataSetChanged();
         sortState=2;
         TextView sortText = (TextView)findViewById(R.id.sortText);
-        sortText.setText("Grad ▲");
+        sortText.setText("Grad");
     }
     public void sortByDate (){
 
@@ -90,12 +90,13 @@ public class History extends AppCompatActivity {
         objAdapter.notifyDataSetChanged();
         sortState=1;
         TextView sortText = (TextView)findViewById(R.id.sortText);
-        sortText.setText("Rapportdatum ▲");
+        sortText.setText("Rapportdatum");
     }
 
     public void updateList(View view){
 
-        errorList = mydb.getAllFixedReportsDetailed();
+        busId = getIntent().getStringExtra("busId");
+        errorList = mydb.getSolvedBusReports(busId);
         setAdapterToListview();
         sortState = sortState%2 +1;
         sort(view);
@@ -108,7 +109,7 @@ public class History extends AppCompatActivity {
 
         sortButton = (Button) findViewById(R.id.sortButton);
         updateButton = (Button) findViewById(R.id.updateButton);
-        String busId = getIntent().getStringExtra("busId");
+        busId = getIntent().getStringExtra("busId");
         //Setting the context for the database to the shared database
         Context sharedContext = null;
         try {
