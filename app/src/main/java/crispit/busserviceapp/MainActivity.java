@@ -43,7 +43,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void openHistory (View V) {
-        Intent i = new Intent(this, History.class);
+        Intent i = new Intent(this, BusHistoryList.class);
         startActivity(i);
     }
 }

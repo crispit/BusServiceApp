@@ -32,6 +32,10 @@
             android:name=".History"
             android:label="@string/history">
         </activity>
+        <activity android:name="BusHistoryList"
+            android:label="@string/BusHistoryList">
+
+        </activity>
         <activity
             android:name=".BusSelector"
             android:label="@string/busSelector">
