@@ -1,32 +1,37 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/colorBackground">
+    android:orientation="vertical"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:gravity="center"
+    android:background="@drawable/background">
 
     <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="130dp"
+        android:layout_height="50dp"
+        android:background="@drawable/start_button"
         android:text="Livefeed"
         android:id="@+id/button1"
-        android:layout_gravity="center_horizontal"
+        android:layout_marginBottom="30dp"
         android:onClick="openLivefeed"/>
 
     <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="130dp"
+        android:layout_height="50dp"
+        android:background="@drawable/start_button"
         android:text="Busslista"
         android:id="@+id/button2"
-        android:layout_gravity="center_horizontal"
+        android:layout_centerInParent="true"
         android:onClick="openBusSelector"/>
 
     <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="130dp"
+        android:layout_height="50dp"
+        android:background="@drawable/start_button"
         android:text="Historik"
         android:id="@+id/button3"
-        android:layout_gravity="center_horizontal"
-        android:onClick="openHistory"/>/>
+        android:layout_marginTop="30dp"
+        android:onClick="openHistory"/>
 
 
 </LinearLayout>
