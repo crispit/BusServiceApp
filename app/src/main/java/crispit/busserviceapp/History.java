@@ -105,10 +105,10 @@ public class History extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_history);
-        //ListView busList = new ListView(this.getBaseContext());
+
         sortButton = (Button) findViewById(R.id.sortButton);
         updateButton = (Button) findViewById(R.id.updateButton);
-        //busId = "Vin_Num_001";
+        String busId = getIntent().getStringExtra("busId");
         //Setting the context for the database to the shared database
         Context sharedContext = null;
         try {
@@ -124,8 +124,7 @@ public class History extends AppCompatActivity {
         mydb = new DBHelper(sharedContext);
         listView = (ListView) findViewById(R.id.busList);
 
-        errorList = mydb.getAllFixedReportsDetailed();
-        //errorList.add(new ErrorReport("994","kf","jk","jga","1234-12-12,12:22:22",3, "Status"));
+        errorList = mydb.getSolvedBusReports(busId);
 
         setAdapterToListview();
 
