@@ -31,13 +31,14 @@ public class BusInfo extends AppCompatActivity {
     DBHelper mydb;
     int sortState = 1;
     ListRowAdapter objAdapter;
+    String busId;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_businfo);
 
-        String busId = getIntent().getStringExtra("busId");
+        busId = getIntent().getStringExtra("busId");
 
         //Setting the context for the database to the shared database
         Context sharedContext = null;
@@ -64,7 +65,7 @@ public class BusInfo extends AppCompatActivity {
                 Bundle bundle = new Bundle();
                 bundle.putString("errorId", errorList.get(position).getId());
                 intent.putExtras(bundle);
-                startActivity(intent);
+                startActivityForResult(intent, 2);
             }
 
         });
@@ -130,4 +131,15 @@ public class BusInfo extends AppCompatActivity {
                 R.layout.row, errorList);
         listView.setAdapter(objAdapter);
     }
+
+    //Method for updating the reports list after a change
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        // Check which request we're responding to
+        if (requestCode == 2) {
+
+            errorList = mydb.getUnsolvedBusReports(busId); // Adds all reports in the list
+            setAdapterToListview();
+        }
+    }//onActivityResult
 }
