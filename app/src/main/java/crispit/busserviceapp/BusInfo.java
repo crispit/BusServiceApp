@@ -69,37 +69,44 @@ public class BusInfo extends AppCompatActivity {
             }
 
         });
+        sortByDate();
     }
 
     public void sort(View view) {
 
+
         if(sortState == 2) {
-            sortByDate();
-
-        }
-
-        else if(sortState == 1){
-            Collections.sort(errorList, new Comparator<ErrorReport>() {
-                @Override
-                public int compare(ErrorReport report1, ErrorReport report2) {
-                    int a = report1.getGrade();
-                    int b = report2.getGrade();
-                    if(a>b)
-                        return -1;
-                    else if (a<b)
-                        return 1;
-                    else
-                        return 0;
-                }
-            });
-            objAdapter.notifyDataSetChanged();
-            sortState=2;
-            TextView sortText = (TextView)findViewById(R.id.sortText);
-            sortText.setText("Grad ▲");
-        }
+        sortByGrade();
+        sortByDate();
 
     }
 
+    else if(sortState == 1){
+        sortByDate();
+        sortByGrade();
+    }
+
+}
+
+    public void sortByGrade(){
+        Collections.sort(errorList, new Comparator<ErrorReport>() {
+            @Override
+            public int compare(ErrorReport report1, ErrorReport report2) {
+                int a = report1.getGrade();
+                int b = report2.getGrade();
+                if(a>b)
+                    return -1;
+                else if (a<b)
+                    return 1;
+                else
+                    return 0;
+            }
+        });
+        objAdapter.notifyDataSetChanged();
+        sortState=2;
+        TextView sortText = (TextView)findViewById(R.id.sortText);
+        sortText.setText("Grad");
+    }
     public void sortByDate (){
 
         Collections.sort(errorList, new Comparator<ErrorReport>() {
@@ -123,14 +130,26 @@ public class BusInfo extends AppCompatActivity {
         objAdapter.notifyDataSetChanged();
         sortState=1;
         TextView sortText = (TextView)findViewById(R.id.sortText);
-        sortText.setText("Rapportdatum ▲");
+        sortText.setText("Rapportdatum");
     }
+
 
     public void setAdapterToListview() {
         objAdapter = new ListRowAdapter(BusInfo.this,
                 R.layout.row, errorList);
         listView.setAdapter(objAdapter);
     }
+
+    public void updateList(View view){
+
+        busId = getIntent().getStringExtra("busId");
+        errorList = mydb.getUnsolvedBusReports(busId);
+        setAdapterToListview();
+        sortState = sortState%2 +1;
+        sort(view);
+    }
+
+
 
     //Method for updating the reports list after a change
     @Override
