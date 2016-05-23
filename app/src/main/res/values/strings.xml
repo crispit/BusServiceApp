@@ -2,4 +2,7 @@
     <string name="app_name">Serviceappen</string>
     <string name="busInfo">Bussinformation</string>
     <string name="detailedErrorReport">Detaljerad Felrapport</string>
+    <string name="busSelector">Detaljerad Felrapport</string>
+    <string name="history">Detaljerad Felrapport</string>
+    <string name="liveFeed">Livefeed</string>
 </resources>

@@ -30,15 +30,15 @@
         </activity>
         <activity
             android:name=".History"
-            android:label="History">
+            android:label="@string/history">
         </activity>
         <activity
             android:name=".BusSelector"
-            android:label="BusSelector">
+            android:label="@string/busSelector">
         </activity>
         <activity
             android:name=".Livefeed"
-            android:label="Livefeed">
+            android:label="@string/liveFeed">
         </activity>
 
         //searchableActivity
