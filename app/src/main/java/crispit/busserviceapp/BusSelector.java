@@ -62,7 +62,7 @@ public class BusSelector extends AppCompatActivity
                 Bundle bundle = new Bundle();
                 bundle.putString("busId", list.get(position));
                 intent.putExtras(bundle);
-                startActivity(intent);
+                startActivityForResult(intent, 1);
             }
 
         });
@@ -70,8 +70,8 @@ public class BusSelector extends AppCompatActivity
     }
 
     public void setAdapterToListview() {
-        CustomListAdapter objAdapter = new CustomListAdapter(BusSelector.this,
-                R.layout.custom_list, list);
+        ColoredBusListAdapter objAdapter = new ColoredBusListAdapter(BusSelector.this,
+                R.layout.custom_list, list, mydb);
         listView.setAdapter(objAdapter);
     }
 
@@ -103,8 +103,8 @@ public class BusSelector extends AppCompatActivity
                 temp.add(s);
             }
         }
-        CustomListAdapter objAdapter = new CustomListAdapter(BusSelector.this,
-                R.layout.custom_list, temp);
+        ColoredBusListAdapter objAdapter = new ColoredBusListAdapter(BusSelector.this,
+                R.layout.custom_list, temp, mydb);
         listView.setAdapter(objAdapter);
         return false;
     }
@@ -117,5 +117,16 @@ public class BusSelector extends AppCompatActivity
             setAdapterToListview();
         return false;
     }
+
+    //Method for updating the reports list after a change
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        // Check which request we're responding to
+        if (requestCode == 1) {
+
+            list = mydb.getAllBuses(); // Adds all reports in the list
+            setAdapterToListview();
+        }
+    }//onActivityResult
 
 }
