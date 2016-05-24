@@ -32,17 +32,27 @@ public class MainActivity extends AppCompatActivity {
 
 
     public void openLivefeed (View V) {
-       Intent i = new Intent(this, Livefeed.class);
-       startActivity(i);
+        Intent intent = new Intent(this, ShowingErrorReports.class);
+        Bundle bundle = new Bundle();
+        bundle.putString("typeOfErrorReports","Livefeed");
+        intent.putExtras(bundle);
+        startActivity(intent);
     }
 
     public void openBusSelector (View V) {
+
         Intent i = new Intent(this, BusSelector.class);
         startActivity(i);
     }
 
     public void openHistory (View V) {
+
         Intent i = new Intent(this, BusHistoryList.class);
         startActivity(i);
+        /*Intent intent = new Intent(this, ShowingErrorReports.class);
+        Bundle bundle = new Bundle();
+        bundle.putString("typeOfErrorReports","History");
+        intent.putExtras(bundle);
+        startActivity(intent);*/
     }
 }

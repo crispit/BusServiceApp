@@ -22,7 +22,7 @@ import java.util.Locale;
 /**
  * Created by Andreas on 2016-05-20.
  */
-public class History extends AppCompatActivity {
+public class ShowingErrorReports extends AppCompatActivity {
 
     ListView listView ;
     private Button sortButton;
@@ -32,7 +32,7 @@ public class History extends AppCompatActivity {
     String busId;
     ListRowAdapter objAdapter;
     int sortState = 1;
-
+    String typeOfErrorReports;
     public void sort(View view) {
 
         if(sortState == 2) {
@@ -67,6 +67,7 @@ public class History extends AppCompatActivity {
         TextView sortText = (TextView)findViewById(R.id.sortText);
         sortText.setText("Grad ▲");
     }
+
     public void sortByDate (){
 
         Collections.sort(errorList, new Comparator<ErrorReport>() {
@@ -95,8 +96,7 @@ public class History extends AppCompatActivity {
 
     public void updateList(View view){
 
-        busId = getIntent().getStringExtra("busId");
-        errorList = mydb.getSolvedBusReports(busId);
+        errorList = getErrorList();
         setAdapterToListview();
         sortState = sortState%2 +1;
         sort(view);
@@ -105,11 +105,11 @@ public class History extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_history);
-
+        typeOfErrorReports = getIntent().getStringExtra("typeOfErrorReports");
+        setTitle();
+        setContentView(R.layout.activity_showingerrorreports);
         sortButton = (Button) findViewById(R.id.sortButton);
         updateButton = (Button) findViewById(R.id.updateButton);
-        busId = getIntent().getStringExtra("busId");
         //Setting the context for the database to the shared database
         Context sharedContext = null;
         try {
@@ -122,10 +122,13 @@ public class History extends AppCompatActivity {
             return;
         }
 
+
+
         mydb = new DBHelper(sharedContext);
         listView = (ListView) findViewById(R.id.busList);
-
-        errorList = mydb.getSolvedBusReports(busId);
+        busId = getIntent().getStringExtra("busId");
+        errorList = getErrorList();
+        //errorList.add(new ErrorReport("994","kf","jk","jga","1234-12-12,12:22:22",3, "Status"));
 
         setAdapterToListview();
 
@@ -147,9 +150,38 @@ public class History extends AppCompatActivity {
 
     }
 
+    public void setTitle(){
+        if (typeOfErrorReports.equals("Livefeed")){
+            setTitle(R.string.liveFeed);
+        }
+
+
+        else if (typeOfErrorReports.equals("BusInfo")){
+            setTitle(R.string.busInfo);
+        }
+
+
+        else if (typeOfErrorReports.equals("History")){
+            setTitle(R.string.history);
+        }
+    }
+
+    public ArrayList<ErrorReport> getErrorList() {
+        if (typeOfErrorReports.equals("Livefeed"))
+            return mydb.getAllNonFixedReportsDetailed();
+
+        else if (typeOfErrorReports.equals("BusInfo"))
+            return mydb.getUnsolvedBusReports(busId);
+
+        else if (typeOfErrorReports.equals("History"))
+            return mydb.getSolvedBusReports(busId);
+        else return null;
+    }
+
+
 
     public void setAdapterToListview() {
-        objAdapter = new ListRowAdapter(History.this,
+        objAdapter = new ListRowAdapter(ShowingErrorReports.this,
                 R.layout.row, errorList);
         listView.setAdapter(objAdapter);
 
@@ -161,7 +193,7 @@ public class History extends AppCompatActivity {
         // Check which request we're responding to
         if (requestCode == 2) {
 
-            errorList = mydb.getSolvedBusReports(busId); // Adds all reports in the list
+            errorList = getErrorList();
             setAdapterToListview();
             sortState = sortState%2 +1;
             sort(listView);

@@ -58,9 +58,10 @@ public class BusSelector extends AppCompatActivity
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, final View view, int position, long id) {
-                Intent intent = new Intent(view.getContext(), BusInfo.class);
+                Intent intent = new Intent(view.getContext(), ShowingErrorReports.class);
                 Bundle bundle = new Bundle();
                 bundle.putString("busId", list.get(position));
+                bundle.putString("typeOfErrorReports","BusInfo");
                 intent.putExtras(bundle);
                 startActivityForResult(intent, 1);
             }

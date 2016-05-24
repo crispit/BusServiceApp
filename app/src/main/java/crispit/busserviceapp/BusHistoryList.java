@@ -55,8 +55,9 @@ public class BusHistoryList extends AppCompatActivity{
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, final View view, int position, long id) {
-                Intent intent = new Intent(view.getContext(), History.class);
+                Intent intent = new Intent(view.getContext(), ShowingErrorReports.class);
                 Bundle bundle = new Bundle();
+                bundle.putString("typeOfErrorReports","History");
                 bundle.putString("busId", list.get(position));
                 intent.putExtras(bundle);
                 startActivity(intent);
