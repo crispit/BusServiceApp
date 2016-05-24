@@ -25,14 +25,60 @@ import java.util.Locale;
 public class ShowingErrorReports extends AppCompatActivity {
 
     ListView listView ;
-    private Button sortButton;
     Button updateButton;
     DBHelper mydb;
     private ArrayList<ErrorReport> errorList;
     String busId;
     ListRowAdapter objAdapter;
-    int sortState = 1;
+    int sortState;
     String typeOfErrorReports;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+        //Setting the context for the database to the shared database
+        Context sharedContext = null;
+        try {
+            sharedContext = this.createPackageContext("com.example.fredrikhansson.komigennuraa", Context.CONTEXT_INCLUDE_CODE);
+            if (sharedContext == null) {
+                return;
+            }
+        } catch (Exception e) {
+            String error = e.getMessage();
+            return;
+        }
+
+        typeOfErrorReports = getIntent().getStringExtra("typeOfErrorReports");
+        setTitle();
+        setContentView(R.layout.activity_showingerrorreports);
+        updateButton = (Button) findViewById(R.id.updateButton);
+        sortState = 1;
+        mydb = new DBHelper(sharedContext);
+        listView = (ListView) findViewById(R.id.busList);
+        busId = getIntent().getStringExtra("busId");
+        errorList = getErrorList();
+
+        setAdapterToListview();
+
+        sortByDate();
+
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, final View view, int position, long id) {
+                Intent intent = new Intent(view.getContext(),DetailedErrorReport.class);
+                Bundle bundle = new Bundle();
+                bundle.putString("errorId",errorList.get(position).getId());
+                intent.putExtras(bundle);
+                startActivityForResult(intent, 2);
+            }
+
+        });
+
+    }
+
+
+
     public void sort(View view) {
 
         if(sortState == 2) {
@@ -102,53 +148,7 @@ public class ShowingErrorReports extends AppCompatActivity {
         sort(view);
     }
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        typeOfErrorReports = getIntent().getStringExtra("typeOfErrorReports");
-        setTitle();
-        setContentView(R.layout.activity_showingerrorreports);
-        sortButton = (Button) findViewById(R.id.sortButton);
-        updateButton = (Button) findViewById(R.id.updateButton);
-        //Setting the context for the database to the shared database
-        Context sharedContext = null;
-        try {
-            sharedContext = this.createPackageContext("com.example.fredrikhansson.komigennuraa", Context.CONTEXT_INCLUDE_CODE);
-            if (sharedContext == null) {
-                return;
-            }
-        } catch (Exception e) {
-            String error = e.getMessage();
-            return;
-        }
 
-
-
-        mydb = new DBHelper(sharedContext);
-        listView = (ListView) findViewById(R.id.busList);
-        busId = getIntent().getStringExtra("busId");
-        errorList = getErrorList();
-        //errorList.add(new ErrorReport("994","kf","jk","jga","1234-12-12,12:22:22",3, "Status"));
-
-        setAdapterToListview();
-
-
-        sortByDate();
-
-
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, final View view, int position, long id) {
-                Intent intent = new Intent(view.getContext(),DetailedErrorReport.class);
-                Bundle bundle = new Bundle();
-                bundle.putString("errorId",errorList.get(position).getId());
-                intent.putExtras(bundle);
-                startActivityForResult(intent, 2);
-            }
-
-        });
-
-    }
 
     public void setTitle(){
         if (typeOfErrorReports.equals("Livefeed")){
