@@ -65,7 +65,7 @@ public class History extends AppCompatActivity {
         objAdapter.notifyDataSetChanged();
         sortState=2;
         TextView sortText = (TextView)findViewById(R.id.sortText);
-        sortText.setText("Grad");
+        sortText.setText("Grad ▲");
     }
     public void sortByDate (){
 
@@ -90,7 +90,7 @@ public class History extends AppCompatActivity {
         objAdapter.notifyDataSetChanged();
         sortState=1;
         TextView sortText = (TextView)findViewById(R.id.sortText);
-        sortText.setText("Rapportdatum");
+        sortText.setText("Rapportdatum ▲");
     }
 
     public void updateList(View view){

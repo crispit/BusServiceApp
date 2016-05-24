@@ -69,6 +69,7 @@ public class BusInfo extends AppCompatActivity {
             }
 
         });
+        sortByGrade();
         sortByDate();
     }
 
@@ -105,7 +106,7 @@ public class BusInfo extends AppCompatActivity {
         objAdapter.notifyDataSetChanged();
         sortState=2;
         TextView sortText = (TextView)findViewById(R.id.sortText);
-        sortText.setText("Grad");
+        sortText.setText("ghfghfgh ▲");
     }
     public void sortByDate (){
 
@@ -130,7 +131,7 @@ public class BusInfo extends AppCompatActivity {
         objAdapter.notifyDataSetChanged();
         sortState=1;
         TextView sortText = (TextView)findViewById(R.id.sortText);
-        sortText.setText("Rapportdatum");
+        sortText.setText("Rapportdatum ▲");
     }
 
 

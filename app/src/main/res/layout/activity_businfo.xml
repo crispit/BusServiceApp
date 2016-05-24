@@ -42,7 +42,7 @@
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceSmall"
         android:text="Osorterad"
-        android:textSize="20dp"
+        android:textSize="20sp"
         android:id="@+id/sortText"
         android:layout_below="@+id/sortButton"
         android:layout_alignParentRight="true"
