@@ -10,6 +10,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 import java.util.ArrayList;
@@ -17,20 +18,21 @@ import java.util.ArrayList;
 /**
  * Created by Andreas on 2016-05-20.
  */
-public class BusSelector extends AppCompatActivity
+public class BusList extends AppCompatActivity
         implements SearchView.OnQueryTextListener {
 
     ListView listView ;
     DBHelper mydb;
     private ArrayList<String> list;
     String busId;
+    String typeOfBusList;
+    ArrayAdapter objAdapter;
 
     @Override
     protected void onCreate (Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.bus_selector);
 
-        //busId = "Vin_Num_001";
 
         //Setting the context for the database to the shared database
         Context sharedContext = null;
@@ -45,15 +47,14 @@ public class BusSelector extends AppCompatActivity
             return;
         }
 
+        typeOfBusList = getIntent().getStringExtra("typeOfBusList");
+        setTitle();
         mydb = new DBHelper(sharedContext);
-
         listView = (ListView) findViewById(R.id.busList);
-
         list = new ArrayList<>();
-
         list = mydb.getAllBuses();
 
-        setAdapterToListview();
+        setAdapterToListView(list);
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -61,7 +62,7 @@ public class BusSelector extends AppCompatActivity
                 Intent intent = new Intent(view.getContext(), ShowingErrorReports.class);
                 Bundle bundle = new Bundle();
                 bundle.putString("busId", list.get(position));
-                bundle.putString("typeOfErrorReports","BusInfo");
+                putTypeOfErrorReportInBundle(bundle);
                 intent.putExtras(bundle);
                 startActivityForResult(intent, 1);
             }
@@ -70,9 +71,41 @@ public class BusSelector extends AppCompatActivity
 
     }
 
-    public void setAdapterToListview() {
-        ColoredBusListAdapter objAdapter = new ColoredBusListAdapter(BusSelector.this,
-                R.layout.custom_list, list, mydb);
+    public void putTypeOfErrorReportInBundle(Bundle bundle){
+        if (typeOfBusList.equals("History")){
+            bundle.putString("typeOfErrorReports","History");
+        }
+
+        else if (typeOfBusList.equals("BusInfo")){
+            bundle.putString("typeOfErrorReports","BusInfo");
+        }
+
+
+    }
+
+    public void setTitle(){
+
+        if (typeOfBusList.equals("BusInfo")){
+            setTitle(R.string.busSelector);
+        }
+
+        else if (typeOfBusList.equals("History")){
+            setTitle(R.string.BusHistoryList);
+        }
+
+
+    }
+
+    public void setAdapterToListView(ArrayList<String> list) {
+
+        if (typeOfBusList.equals("BusInfo")){
+            objAdapter = new ColoredBusListAdapter(BusList.this,
+                    R.layout.custom_list, list, mydb);
+        }
+        else {
+            objAdapter = new CustomListAdapter(BusList.this,
+                    R.layout.custom_list, list);
+        }
         listView.setAdapter(objAdapter);
     }
 
@@ -93,7 +126,7 @@ public class BusSelector extends AppCompatActivity
     public boolean onQueryTextSubmit(String query) {
 
         if(query==null){
-            setAdapterToListview();
+            setAdapterToListView(list);
             return false;
         }
 
@@ -104,8 +137,8 @@ public class BusSelector extends AppCompatActivity
                 temp.add(s);
             }
         }
-        ColoredBusListAdapter objAdapter = new ColoredBusListAdapter(BusSelector.this,
-                R.layout.custom_list, temp, mydb);
+
+        setAdapterToListView(temp);
         listView.setAdapter(objAdapter);
         return false;
     }
@@ -115,7 +148,7 @@ public class BusSelector extends AppCompatActivity
     public boolean onQueryTextChange(String newText) {
         // User changed the text
         if(newText.equals(""))
-            setAdapterToListview();
+            setAdapterToListView(list);
         return false;
     }
 
@@ -126,7 +159,7 @@ public class BusSelector extends AppCompatActivity
         if (requestCode == 1) {
 
             list = mydb.getAllBuses(); // Adds all reports in the list
-            setAdapterToListview();
+            setAdapterToListView(list);
         }
     }//onActivityResult
 

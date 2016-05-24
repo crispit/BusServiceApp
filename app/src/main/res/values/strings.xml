@@ -5,5 +5,5 @@
     <string name="busSelector">Välj buss</string>
     <string name="history">Historik</string>
     <string name="liveFeed">Livefeed</string>
-    <string name="BusHistoryList">HistorikLista</string>
+    <string name="BusHistoryList">Historiklista</string>
 </resources>

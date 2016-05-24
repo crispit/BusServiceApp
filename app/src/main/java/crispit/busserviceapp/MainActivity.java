@@ -41,18 +41,19 @@ public class MainActivity extends AppCompatActivity {
 
     public void openBusSelector (View V) {
 
-        Intent i = new Intent(this, BusSelector.class);
-        startActivity(i);
+        Intent intent = new Intent(this, BusList.class);
+        Bundle bundle = new Bundle();
+        bundle.putString("typeOfBusList","BusInfo");
+        intent.putExtras(bundle);
+        startActivity(intent);
     }
 
     public void openHistory (View V) {
 
-        Intent i = new Intent(this, BusHistoryList.class);
-        startActivity(i);
-        /*Intent intent = new Intent(this, ShowingErrorReports.class);
+        Intent intent = new Intent(this, BusList.class);
         Bundle bundle = new Bundle();
-        bundle.putString("typeOfErrorReports","History");
+        bundle.putString("typeOfBusList","History");
         intent.putExtras(bundle);
-        startActivity(intent);*/
+        startActivity(intent);
     }
 }

@@ -29,13 +29,9 @@
             android:name=".ShowingErrorReports"
             android:label="ShowingErrorReports">
         </activity>
-        <activity android:name="BusHistoryList"
-            android:label="@string/BusHistoryList">
-
-        </activity>
         <activity
-            android:name=".BusSelector"
-            android:label="@string/busSelector">
+            android:name=".BusList"
+            android:label="BusList">
         </activity>
 
         //searchableActivity
