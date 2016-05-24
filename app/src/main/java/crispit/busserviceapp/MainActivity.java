@@ -27,14 +27,13 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
     }
 
 
 
     public void openLivefeed (View V) {
-        Intent i = new Intent(this, Livefeed.class);
-        startActivity(i);
+       Intent i = new Intent(this, Livefeed.class);
+       startActivity(i);
     }
 
     public void openBusSelector (View V) {

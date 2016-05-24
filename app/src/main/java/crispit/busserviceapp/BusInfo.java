@@ -106,7 +106,7 @@ public class BusInfo extends AppCompatActivity {
         objAdapter.notifyDataSetChanged();
         sortState=2;
         TextView sortText = (TextView)findViewById(R.id.sortText);
-        sortText.setText("ghfghfgh ▲");
+        sortText.setText("Grad ▲");
     }
     public void sortByDate (){
 
@@ -160,6 +160,8 @@ public class BusInfo extends AppCompatActivity {
 
             errorList = mydb.getUnsolvedBusReports(busId); // Adds all reports in the list
             setAdapterToListview();
+            sortState = sortState%2 +1;
+            sort(listView);
         }
     }//onActivityResult
 }

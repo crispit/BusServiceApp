@@ -141,7 +141,7 @@ public class Livefeed extends AppCompatActivity {
                 Bundle bundle = new Bundle();
                 bundle.putString("errorId",errorList.get(position).getId());
                 intent.putExtras(bundle);
-                startActivity(intent);
+                startActivityForResult(intent, 2);
             }
 
         });
@@ -155,4 +155,17 @@ public class Livefeed extends AppCompatActivity {
         listView.setAdapter(objAdapter);
 
     }
+
+    //Method for updating the reports list after a change
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        // Check which request we're responding to
+        if (requestCode == 2) {
+
+            errorList = mydb.getAllNonFixedReportsDetailed(); // Adds all reports in the list
+            setAdapterToListview();
+            sortState = sortState%2 +1;
+            sort(listView);
+        }
+    }//onActivityResult
 }
