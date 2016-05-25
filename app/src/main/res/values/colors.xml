@@ -15,5 +15,7 @@
     <color name="orangeb2">#ff6d00</color>
     <color name="red">#dd2c00</color>
     <color name="lightgreen">#a4c639</color>
+    <color name="lightred">#ff8a80</color>
+    <color name="lightgreen2">#ccff90</color>
 
 </resources>

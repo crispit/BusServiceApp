@@ -61,9 +61,9 @@ public class ColoredBusListAdapter extends ArrayAdapter<String> {
         //here set your color as per position
         view.setBackgroundResource(R.drawable.list_bg);
         if (mydb.getUnsolvedBusReports(busId).isEmpty()) {
-            view.setBackgroundColor(this.getContext().getResources().getColor(R.color.lightgreen));
+            view.setBackgroundColor(this.getContext().getResources().getColor(R.color.lightgreen2));
         } else {
-            view.setBackgroundColor(this.getContext().getResources().getColor(R.color.red));
+            view.setBackgroundColor(this.getContext().getResources().getColor(R.color.lightred));
         }
 
         return view;
